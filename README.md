@@ -1,42 +1,27 @@
-<div align="center">
-  <img width="1200" height="475" alt="Project Banner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
+# AI Studio Application
 
-  # AI Studio Web Application
+An interactive web application powered by Google's Gemini API, built for practical evaluation in the **ICT Laboratory Midterm Examination**.
 
-  *A web application powered by the Gemini API, developed for educational and academic evaluation.*
-
-  [![Educational Project](https://img.shields.io/badge/Academic-Midterm%20Exam-blue)](#)
-  [![Node.js](https://img.shields.io/badge/Node.js-v18%2B-green)](https://nodejs.org/)
-</div>
+**Stack:** React / Node.js + Gemini 1.5 API + Tailwind CSS
 
 ---
 
-## 📌 Project Overview
+## Features
 
-This project is a web application built using Google AI Studio and the Gemini API. It was created as part of the **Midterm Examination for the ICT Laboratory course**. 
-
-> **Disclaimer:** This repository and its contents are strictly for educational and academic purposes.
-
----
-
-## 🔗 Live Application & Resources
-
-* **View in AI Studio:** [Project Link](https://ai.studio/apps/c0464e65-dfc5-4b75-aa3a-e450b30b9744)
+* **AI-Powered Responses:** Real-time generation using Google AI Studio integration.
+* **Interactive UI:** Clean, responsive front-end designed for dynamic interaction.
+* **Environment Configuration:** Secure API key handling via local environment variables.
 
 ---
 
-## 🚀 Getting Started
-
-Follow these steps to run the application locally on your machine.
+## Local Setup
 
 ### Prerequisites
+* **Node.js:** v18+
+* **Gemini API Key:** Obtained from Google AI Studio
 
-* [Node.js](https://nodejs.org/) (v18 or higher recommended)
-* A valid **Gemini API Key** from [Google AI Studio](https://aistudio.google.com/)
+### Installation
 
-### Installation & Local Setup
-
-1. **Clone or download the repository:**
+1. Install project dependencies:
    ```bash
-   git clone <https://github.com/AegonTheConqueror0/ICT_Midterm>
-   cd <ICT_Midterm>
+   npm install
