@@ -1,0 +1,6 @@
+{
+  "name": "Shipboard ICT Interactive Laboratory Assessment",
+  "description": "Interactive assessment for Shipboard Computer Hardware and Network Design featuring hotspot labelling, component matching, virtual network topology builder, and sequential checking procedures.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

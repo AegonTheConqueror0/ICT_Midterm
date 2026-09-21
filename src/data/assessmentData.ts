@@ -1,0 +1,226 @@
+import { HotspotQuestion, ShipboardApplicationQuestion, MatchItem, SituationCheck, HandlingStep } from '../types';
+
+export const HOTSPOT_QUESTIONS: HotspotQuestion[] = [
+  {
+    id: 'hp-1',
+    title: 'Component 1',
+    description: 'Main circuit board',
+    correctChoice: 'Motherboard',
+    choices: ['Motherboard', 'Monitor', 'Router', 'Keyboard'],
+    feedbackCorrect: 'Correct. The motherboard connects the major internal components of the computer system.',
+    feedbackIncorrect: 'Incorrect. The main circuit board that connects all critical components is the Motherboard.',
+    componentKey: 'motherboard',
+    hotspotCoords: { x: 390, y: 155, width: 190, height: 170, label: 'Main Circuit Board (Motherboard)' },
+  },
+  {
+    id: 'hp-2',
+    title: 'Component 2',
+    description: 'Temporary working memory',
+    correctChoice: 'RAM',
+    choices: ['RAM', 'SSD', 'Switch', 'Printer'],
+    feedbackCorrect: 'Correct. RAM (Random Access Memory) provides high-speed volatile temporary storage for active programs and data.',
+    feedbackIncorrect: 'Incorrect. RAM is temporary memory. The component used for permanent storage is the SSD.',
+    componentKey: 'ram',
+    hotspotCoords: { x: 440, y: 145, width: 45, height: 70, label: 'RAM (Desktop Memory Modules / DIMMs)' },
+  },
+  {
+    id: 'hp-3',
+    title: 'Component 3',
+    description: 'Device used to connect a computer to a network',
+    correctChoice: 'NIC',
+    choices: ['NIC', 'CPU', 'Speaker', 'Scanner'],
+    feedbackCorrect: 'Correct. The Network Interface Card (NIC) / Ethernet controller connects the computer to a network.',
+    feedbackIncorrect: 'Incorrect. The component used to establish physical and logical network links is the NIC (Network Interface Card).',
+    componentKey: 'nic',
+    hotspotCoords: { x: 490, y: 245, width: 75, height: 45, label: 'NIC (Network Interface Card / Ethernet Port)' },
+  },
+  {
+    id: 'hp-4',
+    title: 'Component 4',
+    description: 'Device used to display information',
+    correctChoice: 'Monitor',
+    choices: ['Monitor', 'Router', 'RAM', 'Modem'],
+    feedbackCorrect: 'Correct. The monitor visually displays information, application windows, and system status.',
+    feedbackIncorrect: 'Incorrect. The visual output peripheral used to display information is the Monitor.',
+    componentKey: 'monitor',
+    hotspotCoords: { x: 40, y: 80, width: 230, height: 180, label: 'Desktop Computer Monitor (Display)' },
+  },
+  {
+    id: 'hp-5',
+    title: 'Component 5',
+    description: 'Device used for permanent data storage',
+    correctChoice: 'SSD',
+    choices: ['SSD', 'Keyboard', 'Switch', 'Microphone'],
+    feedbackCorrect: 'Correct. The Solid State Drive (SSD) provides permanent, non-volatile data storage for files and OS.',
+    feedbackIncorrect: 'Incorrect. The component used for permanent, non-volatile data storage is the SSD.',
+    componentKey: 'ssd',
+    hotspotCoords: { x: 485, y: 145, width: 70, height: 35, label: 'SSD (M.2 NVMe Solid State Storage)' },
+  },
+];
+
+export const SHIPBOARD_APP_QUESTION: ShipboardApplicationQuestion = {
+  id: 'app-1',
+  question: 'Which computer system is most closely associated with navigation and bridge operations?',
+  choices: [
+    { key: 'A', text: 'Bridge-based computer system' },
+    { key: 'B', text: 'Engine-room computer system' },
+    { key: 'C', text: 'Administrative computer system' },
+    { key: 'D', text: 'Entertainment system' },
+  ],
+  correctAnswer: 'A',
+  feedbackCorrect: 'Correct. Bridge-based computer systems support navigation-related operations, ECDIS charts, radar integration, and steering displays.',
+  feedbackIncorrect: 'Incorrect. Bridge-based computer systems are directly dedicated to navigation, ECDIS, and nautical watchkeeping operations.',
+};
+
+export const MATCH_ITEMS: MatchItem[] = [
+  {
+    id: 'cpu',
+    component: 'CPU',
+    functionText: 'Processes instructions',
+    description: 'Central Processing Unit that executes logic, calculations, and software instructions.',
+    iconName: 'Cpu',
+  },
+  {
+    id: 'ram',
+    component: 'RAM',
+    functionText: 'Temporarily stores data being used',
+    description: 'Volatile high-speed memory holding currently active programs, open tabs, and data.',
+    iconName: 'Zap',
+  },
+  {
+    id: 'ssd',
+    component: 'SSD',
+    functionText: 'Permanently stores files and programs',
+    description: 'Non-volatile solid state drive retaining the operating system, applications, and saved files.',
+    iconName: 'HardDrive',
+  },
+  {
+    id: 'nic',
+    component: 'NIC',
+    functionText: 'Connects the computer to a network',
+    description: 'Network Interface Card / Ethernet adapter linking the PC to local network (LAN) cables.',
+    iconName: 'Network',
+  },
+  {
+    id: 'monitor',
+    component: 'Monitor',
+    functionText: 'Displays information',
+    description: 'Visual display screen rendering the desktop interface, application windows, and graphics.',
+    iconName: 'Monitor',
+  },
+  {
+    id: 'keyboard',
+    component: 'Keyboard',
+    functionText: 'Allows the user to enter text and commands',
+    description: 'Primary input device allowing users to type characters, shortcut keys, and system commands.',
+    iconName: 'Keyboard',
+  },
+];
+
+export const SITUATIONS_DATA: SituationCheck[] = [
+  {
+    id: 'sit-1',
+    situation: 'A workstation has no network connection',
+    correctAction: 'Check the network cable and NIC connection',
+    choices: [
+      'Check the network cable and NIC connection',
+      'Replace the monitor and display adapter',
+      'Format the solid state hard drive immediately',
+      'Reset all shipboard propulsion generators',
+    ],
+    explanation: 'When a workstation lacks connectivity, first verify physical cabling and NIC link status LEDs.',
+  },
+  {
+    id: 'sit-2',
+    situation: 'The switch has no power indicator',
+    correctAction: 'Check the power connection and switch',
+    choices: [
+      'Check the power connection and switch',
+      'Re-install the workstation web browser',
+      'Replace all ethernet patch cords in the rack',
+      'Re-align the satellite radome antenna',
+    ],
+    explanation: 'No power LEDs on the switch indicates an electrical feed failure, unseated IEC power cord, or tripped power supply.',
+  },
+  {
+    id: 'sit-3',
+    situation: 'A cable is connected to the wrong port',
+    correctAction: 'Reconnect it to the correct network device',
+    choices: [
+      'Reconnect it to the correct network device',
+      'Cut the cable jacket to check wire twisting',
+      'Update the operating system kernel',
+      'Change the ship voyage destination',
+    ],
+    explanation: 'Mispatched cables cause VLAN mismatches or isolation; reconnect the patch cord to its designated port.',
+  },
+  {
+    id: 'sit-4',
+    situation: 'A computer is not responding',
+    correctAction: 'Check power, cables, and system status',
+    choices: [
+      'Check power, cables, and system status',
+      'Immediately discard the computer overboard',
+      'Disconnect the ship satellite antenna feed',
+      'Open the keyboard and wash with solvent',
+    ],
+    explanation: 'An unresponsive workstation requires systematic physical checks: AC power, cable seating, fans, and hardware state indicators.',
+  },
+  {
+    id: 'sit-5',
+    situation: 'The network layout is incomplete',
+    correctAction: 'Identify the missing device or connection',
+    choices: [
+      'Identify the missing device or connection',
+      'Shut down the entire ship power distribution grid',
+      'Remove all remaining workstations from the vessel',
+      'Ignore the issue since computers are redundant',
+    ],
+    explanation: 'An incomplete topology isolates critical nodes; audit the network diagram and identify the missing node or link.',
+  },
+];
+
+export const HANDLING_STEPS_DATA: HandlingStep[] = [
+  {
+    id: 1,
+    text: 'Inspect the computer and network equipment.',
+    correctOrder: 1,
+    detail: 'Perform physical visual inspection for damage, loose chassis screws, water ingress, or dust accumulation.',
+    icon: 'Eye',
+  },
+  {
+    id: 2,
+    text: 'Check the power and cable connections.',
+    correctOrder: 2,
+    detail: 'Verify secure seating of IEC power cords, UPS outputs, Ethernet patch cords, and grounding terminals.',
+    icon: 'Plug',
+  },
+  {
+    id: 3,
+    text: 'Confirm that devices are connected to the correct ports.',
+    correctOrder: 3,
+    detail: 'Audit switch port labels and NIC ports according to the shipboard network topology map.',
+    icon: 'GitBranch',
+  },
+  {
+    id: 4,
+    text: 'Turn on the equipment according to procedure.',
+    correctOrder: 4,
+    detail: 'Power up in proper sequence: infrastructure (switch, router) first, then server, then terminal workstations.',
+    icon: 'Power',
+  },
+  {
+    id: 5,
+    text: 'Test the network connection.',
+    correctOrder: 5,
+    detail: 'Execute ICMP ping tests, link speed negotiation checks, and verify access to shared server resources.',
+    icon: 'Activity',
+  },
+  {
+    id: 6,
+    text: 'Report any unresolved problem.',
+    correctOrder: 6,
+    detail: 'Document findings in the ICT maintenance log and notify the Bridge Officer or Chief Engineer.',
+    icon: 'FileText',
+  },
+];
