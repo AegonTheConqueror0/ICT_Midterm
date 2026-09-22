@@ -24,6 +24,94 @@ import { HcdcSchoolLogo, ComeProgramLogo } from './Logos';
 import html2canvas from 'html2canvas-pro';
 import { jsPDF } from 'jspdf';
 
+const signatureAssets = import.meta.glob<{ default: string }>(
+  '../assets/images/*',
+  { eager: true }
+);
+
+function resolveSignatureAsset(candidates: string[], fallbackPublicUrl: string): string {
+  for (const name of candidates) {
+    const key = `../assets/images/${name}`;
+    if (signatureAssets[key]?.default) {
+      return signatureAssets[key].default;
+    }
+  }
+  return fallbackPublicUrl;
+}
+
+const assessorSignatureUrl = resolveSignatureAsset(
+  ['edgardo_rojas_signature.svg', 'edgardo_rojas_signature.png', 'edgardo_signature.svg'],
+  '/assets/images/edgardo_rojas_signature.svg'
+);
+
+const AssessorSignature: React.FC<{ className?: string }> = ({ className = 'w-32 h-20' }) => {
+  const [imgError, setImgError] = useState<boolean>(false);
+  const [currentSrc, setCurrentSrc] = useState<string>(assessorSignatureUrl);
+
+  const handleError = () => {
+    if (currentSrc !== '/assets/images/edgardo_rojas_signature.svg') {
+      setCurrentSrc('/assets/images/edgardo_rojas_signature.svg');
+    } else {
+      setImgError(true);
+    }
+  };
+
+  if (imgError) {
+    return (
+      <svg
+        viewBox="0 0 400 400"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`shrink-0 ${className}`}
+        aria-label="Edgardo Rojas Signature"
+      >
+        <g
+          stroke="#3730a3"
+          strokeWidth="5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        >
+          <path
+            d="M 120,195
+               C 100,190 90,180 110,175
+               C 135,170 160,180 190,170
+               C 210,163 225,140 240,115
+               C 258,82 285,55 320,60
+               C 350,65 362,95 340,120
+               C 320,142 295,152 268,160
+               C 240,168 210,172 182,180"
+          />
+          <path
+            d="M 200,75
+               L 200,330
+               C 200,345 188,358 172,352
+               C 158,347 152,328 160,310
+               C 170,288 190,278 200,260"
+          />
+          <path
+            d="M 118,192
+               C 145,185 170,180 200,175
+               L 370,80"
+          />
+        </g>
+      </svg>
+    );
+  }
+
+  return (
+    <img
+      src={currentSrc}
+      alt="Edgardo Rojas - Authorized Signature"
+      crossOrigin="anonymous"
+      className={`object-contain shrink-0 ${className}`}
+      onError={handleError}
+      referrerPolicy="no-referrer"
+      loading="eager"
+    />
+  );
+};
+
 interface ResultScreenProps {
   cadet: CadetInfo;
   scores: AssessmentScores;
@@ -40,7 +128,7 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({
   onNavigateTab,
   onRestart,
   submissionTimestamp,
-  receiptNumber = 'HCDC-REC-2024-COME-84920',
+  receiptNumber = 'HCDC-REC-2024-ICTLab-84920',
   isLocked = true,
 }) => {
   const printRef = useRef<HTMLDivElement>(null);
@@ -169,7 +257,7 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({
       }
 
       const safeName = (cadet.name || 'Cadet').replace(/[^a-zA-Z0-9_-]/g, '_');
-      const filename = `HCDC_COME_BSMT_Receipt_${safeName}_${receiptNumber}.pdf`;
+      const filename = `HCDC_ICTLab_BSMT_Receipt_${safeName}_${receiptNumber}.pdf`;
       pdf.save(filename);
     } catch (err) {
       console.error('Direct PDF export encountered an issue, triggering system print fallback:', err);
@@ -201,7 +289,7 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({
             <div className="font-bold text-sm text-slate-900 flex items-center gap-2">
               <span>Assessment Completed & Locked</span>
               <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">
-                Verified COME Receipt Ready
+                Verified Receipt
               </span>
             </div>
             <p className="text-xs text-slate-500">
@@ -265,7 +353,7 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({
                 HOLY CROSS OF DAVAO COLLEGE, INC.
               </div>
               <div className="text-xs sm:text-sm font-extrabold text-sky-900 tracking-wide uppercase">
-                COLLEGE OF MARITIME EDUCATION (COME)
+                COLLEGE OF MARITIME EDUCATION
               </div>
               <div className="text-[11px] sm:text-xs font-bold text-slate-700 uppercase tracking-wide mt-0.5">
                 Department of Marine Transportation • BSMT Program
@@ -283,10 +371,10 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({
 
           <div className="mt-4 text-center">
             <div className="inline-block bg-slate-900 text-white px-4 py-1 rounded text-xs font-bold tracking-wider uppercase">
-              Official BSMT Examination Record & Laboratory Assessment Receipt
+               Official ICT:Laboratory Examination Record & Laboratory Assessment Receipt
             </div>
             <div className="mt-1.5 text-xs text-slate-600 font-medium">
-              Course: <strong>COME-ICT 101: Shipboard Computer Hardware & Network Design</strong>
+              Course: <strong>ICT 101: Software Applications and Network Systems used in Seagoing Ships</strong>
             </div>
           </div>
         </div>
@@ -303,7 +391,10 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({
           </div>
           <div>
             <span className="text-[10px] uppercase font-bold text-slate-400 block">Assessor / Instructor</span>
-            <span className="font-bold text-slate-900">Edgardo Rojas</span>
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-slate-900">Edgardo Rojas</span>
+              <AssessorSignature className="w-14 h-7 opacity-90" />
+            </div>
           </div>
           <div>
             <span className="text-[10px] uppercase font-bold text-slate-400 block">Assessor Email</span>
@@ -336,7 +427,7 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({
             </div>
             <div className="pt-1 text-[11px] text-slate-500 flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              <span>Assessment Submission State: <strong>LOCKED & CERTIFIED (COME)</strong></span>
+              <span>Assessment Submission State: <strong>LOCKED & CERTIFIED (ICT)</strong></span>
             </div>
           </div>
 
@@ -613,20 +704,25 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({
 
         {/* Dual Signatures & Endorsement Block */}
         <div className="pt-4 border-t-2 border-slate-300 grid grid-cols-2 gap-8 text-center text-xs">
-          <div className="space-y-1">
-            <div className="border-b border-slate-400 pb-7 font-bold text-slate-900 text-sm">
-              {cadet.name || 'Juan Dela Cruz'}
+          <div className="space-y-2">
+            <div className="relative h-24 sm:h-28 flex items-end justify-center">
+              <div className="font-bold text-slate-900 text-sm w-full pb-3 border-b border-slate-400">
+                {cadet.name || 'Juan Dela Cruz'}
+              </div>
             </div>
-            <div className="font-bold text-slate-800 uppercase text-[10px]">Cadet / Examinee Signature (BSMT)</div>
-            <div className="text-[10px] text-slate-500">Cadet ID: {cadet.cadetId || '2024-COME-0192'} • Date: {formattedDate.split(',')[0]}</div>
+            <div className="font-bold text-slate-800 uppercase text-[10px] leading-tight">Cadet / Examinee Signature (BSMT)</div>
+            <div className="text-[10px] text-slate-500 leading-tight">Cadet ID: {cadet.cadetId || '2024-COME-0192'} • Date: {formattedDate.split(',')[0]}</div>
           </div>
 
-          <div className="space-y-1">
-            <div className="border-b border-slate-400 pb-7 font-bold text-slate-900 text-sm">
-              Edgardo Rojas
+          <div className="space-y-2">
+            <div className="relative h-24 sm:h-28 flex items-end justify-center">
+              <AssessorSignature className="absolute inset-x-0 top-0 mx-auto w-48 h-28 sm:w-100 sm:h-45 z-20" />
+              <div className="font-bold text-slate-900 text-sm w-full pb-3 border-b border-slate-400 relative z-10 pt-14 sm:pt-16">
+                Edgardo Rojas
+              </div>
             </div>
-            <div className="font-bold text-slate-800 uppercase text-[10px]">COME Laboratory Assessor / Instructor</div>
-            <div className="text-[10px] text-slate-500">Holy Cross of Davao College • COME • edgardo.rojas@hcdc.edu.ph</div>
+            <div className="font-bold text-slate-800 uppercase text-[10px] leading-tight">COME Laboratory Assessor / Instructor</div>
+            <div className="text-[10px] text-slate-500 leading-tight">Holy Cross of Davao College • ICT • edgardo.rojas@hcdc.edu.ph</div>
           </div>
         </div>
 
@@ -634,24 +730,16 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({
         <div className="border-t border-slate-200 pt-3 flex flex-wrap items-center justify-between gap-2 text-[10px] text-slate-400">
           <div className="flex items-center gap-2">
             <span className="font-mono tracking-widest text-slate-600 font-bold">|||| | | ||||| ||| |||| | ||| ||||| ||||</span>
-            <span className="font-mono text-[9px] text-slate-500">HASH: 7F9A-COME-HCDC-84920-VERIFIED</span>
+            <span className="font-mono text-[9px] text-slate-500">HASH: 7F9A-ICT-HCDC-84920-VERIFIED</span>
           </div>
           <div className="text-right">
-            Official Computer-Generated Receipt • Holy Cross of Davao College COME Registry
+            Official Computer-Generated Receipt • Holy Cross of Davao College
           </div>
         </div>
       </div>
 
-      {/* Bottom Action Footer (Print, Review, Restart) (Hidden in Print) */}
-      <div className="flex flex-wrap items-center justify-between gap-4 pt-2 print:hidden">
-        <button
-          onClick={onRestart}
-          className="flex items-center gap-2 bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold px-4 py-2.5 rounded-lg border border-slate-200 transition cursor-pointer"
-        >
-          <RotateCcw className="w-4 h-4" />
-          <span>Restart Assessment</span>
-        </button>
-
+      {/* Bottom Action Footer (Print, Review) (Hidden in Print) */}
+      <div className="flex flex-wrap items-center justify-end gap-4 pt-2 print:hidden">
         <div className="flex items-center gap-3">
           <button
             onClick={() => onNavigateTab('hotspot')}

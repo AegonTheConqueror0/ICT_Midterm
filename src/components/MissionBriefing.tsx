@@ -56,7 +56,7 @@ export const MissionBriefing: React.FC<MissionBriefingProps> = ({
       {/* Title & Badge */}
       <div className="text-center mb-8">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-100 text-sky-900 text-xs font-bold tracking-wide uppercase mb-3 border border-sky-200 shadow-xs">
-          <span>HCDC COME • BSMT Midterm Examination</span>
+          <span>HCDC ICT • BSMT Midterm Examination</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight font-serif">
           Shipboard Computer Hardware and Network Design
@@ -81,10 +81,10 @@ export const MissionBriefing: React.FC<MissionBriefingProps> = ({
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-4 text-xs text-slate-300">
             <div className="bg-white/10 px-3 py-1.5 rounded backdrop-blur border border-white/10">
-              <strong className="text-sky-300">College:</strong> College of Maritime Education (COME)
+              <strong className="text-sky-300">College:</strong> College of Maritime Education 
             </div>
             <div className="bg-white/10 px-3 py-1.5 rounded backdrop-blur border border-white/10">
-              <strong className="text-emerald-300">Degree Program:</strong> BSMT Only
+              <strong className="text-emerald-300">Degree Program:</strong> BSMT
             </div>
             <div className="bg-white/10 px-3 py-1.5 rounded backdrop-blur border border-white/10">
               <strong className="text-white">Coverage:</strong> Topic 1 & Topic 2
@@ -174,7 +174,7 @@ export const MissionBriefing: React.FC<MissionBriefingProps> = ({
                 Cadet Assessment Credentials
               </h3>
               <p className="text-xs text-slate-500">
-                Official registration for College of Maritime Education (COME) BSMT examination record
+                Official Midterm Examination for College of Maritime Education (COME) ICT: Laboratory Exercise
               </p>
             </div>
           </div>
@@ -324,10 +324,10 @@ export const MissionBriefing: React.FC<MissionBriefingProps> = ({
 
           <div className="col-span-1 sm:col-span-2 pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600 bg-sky-50/60 p-2.5 rounded-lg border border-sky-100">
             <span className="font-semibold text-slate-800">
-              Department & Academic Program:
+              Academic Program:
             </span>
             <span className="font-bold text-sky-900 bg-sky-200/80 px-2.5 py-0.5 rounded border border-sky-300">
-              Department of Marine Transportation • BSMT Program Only
+              Bachelor of Science in Marine Transportation
             </span>
           </div>
         </div>
