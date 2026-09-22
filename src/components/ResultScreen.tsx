@@ -422,7 +422,7 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({
                 Training Vessel: <strong className="text-slate-900">{cadet.vessel || 'T/S Kapitan Felix Oca'}</strong>
               </div>
               <div>
-                Degree Program: <strong className="text-emerald-800 font-bold">BSMT Only</strong>
+                Degree Program: <strong className="text-emerald-800 font-bold">BSMT</strong>
               </div>
             </div>
             <div className="pt-1 text-[11px] text-slate-500 flex items-center gap-1.5">
